@@ -12,7 +12,7 @@ import { SharedModule } from '../../../shared';
   selector: 'app-book-form',
   imports: [SharedModule],
   templateUrl: './book-form.component.html',
-  styleUrls: ['./book-form.component.scss']
+  styleUrls: ['./book-form.component.css']
 })
 export class BookFormComponent implements OnInit {
   bookForm!: FormGroup;
@@ -66,7 +66,7 @@ export class BookFormComponent implements OnInit {
   loadBook(id: number): void {
     this.loading = true;
     this.error = '';
-    
+
     this.bookService.getBookById(id)
       .pipe(finalize(() => this.loading = false))
       .subscribe({

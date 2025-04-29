@@ -1,8 +1,16 @@
-<h2 mat-dialog-title>{{ data.title }}</h2>
-<div mat-dialog-content>
-    <p>{{ data.message }}</p>
-</div>
-<div mat-dialog-actions align="end">
-    <button mat-button (click)="onCancel()">{{ data.cancelText }}</button>
-    <button mat-button color="warn" (click)="onConfirm()">{{ data.confirmText }}</button>
+<div class="modal-content">
+    <div class="modal-header border-0 px-0">
+        <h2 class="mdc-dialog__title modal-title" mat-dialog-title>{{ data.title }}</h2>
+    </div>
+    <div class="mdc-dialog__content modal-body px-0" mat-dialog-content>
+        <p>{{ data.message }}</p>
+    </div>
+    <div class="mdc-dialog__actions modal-footer border-0 px-0" mat-dialog-actions>
+        <button mat-flat-button class="btn btn-outline-primary" (click)="onCancel()">
+            {{ data.cancelText }}
+        </button>
+        <button mat-flat-button class="btn btn-danger" color="warn" (click)="onConfirm()">
+            {{ data.confirmText }}
+        </button>
+    </div>
 </div>

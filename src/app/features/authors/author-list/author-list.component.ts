@@ -60,7 +60,7 @@ export class AuthorListComponent implements OnInit {
 
   deleteAuthor(id: number): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+      width: '500px',
       data: {
         title: 'Confirm Deletion',
         message: 'Are you sure you want to delete this author?',

@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { finalize } from 'rxjs';
 import { Book } from '../../../core/models/book.model';
 import { BookService } from '../../../core/services/book.service';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { SlicePipe } from '@angular/common';
 import { SharedModule } from '../../../shared';
 
 @Component({
   selector: 'app-book-list',
-  imports: [SlicePipe, SharedModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule, SharedModule],
   templateUrl: './book-list.component.html',
-  styleUrls: ['./book-list.component.scss']
+  styleUrls: ['./book-list.component.css']
 })
 export class BookListComponent implements OnInit {
   books: Book[] = [];
@@ -47,14 +48,14 @@ export class BookListComponent implements OnInit {
 
   editBook(id: number, event: Event): void {
     event.stopPropagation();
-    this.router.navigate(['/books/edit', id]);
+    this.router.navigate(['/books', id, 'edit']);
   }
 
   deleteBook(id: number, event: Event): void {
     event.stopPropagation();
 
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px',
+      width: '500px',
       data: {
         title: 'Confirm Deletion',
         message: 'Are you sure you want to delete this book?',

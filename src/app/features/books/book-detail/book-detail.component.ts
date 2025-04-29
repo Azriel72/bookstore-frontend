@@ -11,7 +11,7 @@ import { SharedModule } from '../../../shared';
   selector: 'app-book-detail',
   imports: [SharedModule],
   templateUrl: './book-detail.component.html',
-  styleUrls: ['./book-detail.component.scss']
+  styleUrls: ['./book-detail.component.css']
 })
 export class BookDetailComponent implements OnInit {
   book: Book | null = null;
@@ -34,7 +34,7 @@ export class BookDetailComponent implements OnInit {
   loadBook(id: number): void {
     this.loading = true;
     this.error = '';
-    
+
     this.bookService.getBookById(id)
       .pipe(finalize(() => this.loading = false))
       .subscribe({
@@ -62,7 +62,7 @@ export class BookDetailComponent implements OnInit {
 
   editBook(): void {
     if (this.book) {
-      this.router.navigate(['/books/edit', this.book.id]);
+      this.router.navigate(['/books', this.book.id, 'edit']);
     }
   }
 }

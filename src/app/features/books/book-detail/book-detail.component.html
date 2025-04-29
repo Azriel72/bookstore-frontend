@@ -4,51 +4,49 @@
     </button>
 
     @if(error) {
-        <app-alert type="danger" [message]="error" />
+    <app-alert type="danger" [message]="error" />
+    }
+
+    @if(loading) {
+    <app-loading-spinner></app-loading-spinner>
     }
 
     @if(!loading && book) {
-        <div>
-            <app-loading-spinner></app-loading-spinner>
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">{{ book.title }}</h2>
+            <button class="btn btn-primary" (click)="editBook()">Edit Book</button>
         </div>
-    }
-
-    @if(!loading && book) {
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h2 class="mb-0">{{ book.title }}</h2>
-                <button class="btn btn-primary" (click)="editBook()">Edit Book</button>
+        <div class="card-body">
+            <div class="mb-4">
+                <h4>Description</h4>
+                <p>{{ book.description }}</p>
             </div>
-            <div class="card-body">
-                <div class="mb-4">
-                    <h4>Description</h4>
-                    <p>{{ book.description }}</p>
+
+            <div class="mb-4">
+                <h4>Excerpt</h4>
+                <p>{{ book.excerpt }}</p>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h4>Book Details</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Page Count:</strong> {{ book.pageCount }}</li>
+                        <li class="list-group-item"><strong>Publish Date:</strong> {{ book.publishDate | date }}</li>
+                    </ul>
                 </div>
 
-                <div class="mb-4">
-                    <h4>Excerpt</h4>
-                    <p>{{ book.excerpt }}</p>
-                </div>
-
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <h4>Book Details</h4>
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Page Count:</strong> {{ book.pageCount }}</li>
-                            <li class="list-group-item"><strong>Publish Date:</strong> {{ book.publishDate | date }}</li>
-                        </ul>
-                    </div>
-
-                    <div class="col-md-6" *ngIf="author">
-                        <h4>Author Information</h4>
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Name:</strong> {{ author.firstName }} {{ author.lastName }}
-                            </li>
-                            <li class="list-group-item"><strong>Author ID:</strong> {{ author.id }}</li>
-                        </ul>
-                    </div>
+                <div class="col-md-6" *ngIf="author">
+                    <h4>Author Information</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Name:</strong> {{ author.firstName }} {{ author.lastName }}
+                        </li>
+                        <li class="list-group-item"><strong>Author ID:</strong> {{ author.id }}</li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
     }
 </div>
