@@ -1,0 +1,36 @@
+<div class="container mt-4">
+    <h1>{{ isEditMode ? 'Edit Author' : 'Add New Author' }}</h1>
+
+    <app-alert *ngIf="error" type="danger" [message]="error"></app-alert>
+    <app-alert *ngIf="success" type="success" [message]="success"></app-alert>
+
+    <div *ngIf="loading">
+        <app-loading-spinner></app-loading-spinner>
+    </div>
+
+    <form *ngIf="!loading" [formGroup]="authorForm" (ngSubmit)="onSubmit()" class="mt-4">
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name *</label>
+            <input type="text" class="form-control" id="firstName" formControlName="firstName">
+            <div *ngIf="authorForm.get('firstName')?.invalid && authorForm.get('firstName')?.touched"
+                class="text-danger">
+                First name is required and should be less than 50 characters.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name *</label>
+            <input type="text" class="form-control" id="lastName" formControlName="lastName">
+            <div *ngIf="authorForm.get('lastName')?.invalid && authorForm.get('lastName')?.touched" class="text-danger">
+                Last name is required and should be less than 50 characters.
+            </div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary" [disabled]="authorForm.invalid || submitting">
+                {{ submitting ? 'Saving...' : (isEditMode ? 'Update Author' : 'Create Author') }}
+            </button>
+            <button type="button" class="btn btn-outline-secondary" (click)="cancel()">Cancel</button>
+        </div>
+    </form>
+</div>

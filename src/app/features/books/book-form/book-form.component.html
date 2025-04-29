@@ -1,0 +1,78 @@
+<div class="container mt-4">
+    <h1>{{ isEditMode ? 'Edit Book' : 'Add New Book' }}</h1>
+
+    @if(error) {
+        <app-alert type="danger" [message]="error"></app-alert>
+    }
+
+    @if(success) {
+        <app-alert type="success" [message]="success"></app-alert>
+    }
+
+    @if(loading) {
+        <div>
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+    }
+
+    @if(!loading) {
+        <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="mt-4">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title *</label>
+                <input type="text" class="form-control" id="title" formControlName="title">
+                <div *ngIf="bookForm.get('title')?.invalid && bookForm.get('title')?.touched" class="text-danger">
+                    Title is required and should be less than 100 characters.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description *</label>
+                <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+                <div *ngIf="bookForm.get('description')?.invalid && bookForm.get('description')?.touched" class="text-danger">
+                    Description is required.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="pageCount" class="form-label">Page Count *</label>
+                <input type="number" class="form-control" id="pageCount" formControlName="pageCount" min="1">
+                <div *ngIf="bookForm.get('pageCount')?.invalid && bookForm.get('pageCount')?.touched" class="text-danger">
+                    Page count must be a positive number.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="excerpt" class="form-label">Excerpt</label>
+                <textarea class="form-control" id="excerpt" rows="3" formControlName="excerpt"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="publishDate" class="form-label">Publish Date *</label>
+                <input type="date" class="form-control" id="publishDate" formControlName="publishDate">
+                <div *ngIf="bookForm.get('publishDate')?.invalid && bookForm.get('publishDate')?.touched" class="text-danger">
+                    Publish date is required.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="authorId" class="form-label">Author *</label>
+                <select class="form-select" id="authorId" formControlName="authorId">
+                    <option value="">Select an author</option>
+                    <option *ngFor="let author of authors" [value]="author.id">
+                        {{ author.firstName }} {{ author.lastName }}
+                    </option>
+                </select>
+                <div *ngIf="bookForm.get('authorId')?.invalid && bookForm.get('authorId')?.touched" class="text-danger">
+                    Author is required.
+                </div>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary" [disabled]="bookForm.invalid || submitting">
+                    {{ submitting ? 'Saving...' : (isEditMode ? 'Update Book' : 'Create Book') }}
+                </button>
+                <button type="button" class="btn btn-outline-secondary" (click)="cancel()">Cancel</button>
+            </div>
+        </form>
+    }
+</div>
