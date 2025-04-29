@@ -1,59 +1,34 @@
-# BookstoreFrontend
+# BookStore.WEB - Angular FrontEnd
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
+Este repositorio contiene la aplicación frontend desarrollada con Angular para consumir la API del backend de la tienda de libros, proporcionando una interfaz de usuario moderna para la gestión de libros y autores.
 
-## Development server
+## Requisitos
 
-To start a local development server, run:
+- **Node.js**: Version 18+ (recomendado)
+- **Angular CLI**
+- **npm**: Gestor de paquetes de Node.js
 
-```bash
-ng serve
-```
+## Instalación
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+1. **Clona el repositorio**:
+  ```bash
+   git clone https://github.com/Azriel72/bookstore-frontend.git
+  ```
 
-## Code scaffolding
+2. Navega al directorio del proyecto:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+  ```bash
+   cd bookstore-frontend
+  ```
 
-```bash
-ng generate component component-name
-```
+3. Instala las dependencias:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+  ```bash
+   npm install
+  ```
 
-```bash
-ng generate --help
-```
+4. Ejecuta el servidor de desarrollo:
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+  ```bash
+   ng serve
+  ```
