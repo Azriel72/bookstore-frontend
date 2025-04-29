@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Book } from '../models/book.model';
 import { ApiService } from './api.service';
+import { PaginatedResponse } from '../models/paginated-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,11 @@ export class BookService {
 
   constructor(private apiService: ApiService) { }
 
-  getBooks(): Observable<Book[]> {
-    return this.apiService.get<Book[]>(this.endpoint);
+  getBooks(pageNumber: number = 1, pageSize: number = 9): Observable<PaginatedResponse<Book>> {
+    return this.apiService.get<PaginatedResponse<Book>>(this.endpoint, {
+      pageNumber,
+      pageSize
+    });
   }
 
   getBookById(id: number): Observable<Book> {

@@ -26,3 +26,169 @@ body {
     transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Custom Paginator Styles */
+.mat-mdc-paginator {
+    background-color: transparent !important;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+
+/* Paginator container */
+.mat-mdc-paginator-container {
+    padding: 8px 16px !important;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Items per page selector */
+.mat-mdc-paginator-page-size-select {
+    margin: 0 4px !important;
+    width: 70px !important;
+}
+
+.mat-mdc-form-field-subscript-wrapper {
+    display: none;
+}
+
+/* Center text in select */
+.mat-mdc-select-value {
+    text-align: center !important;
+}
+
+.mat-mdc-select-value-text {
+    text-align: center !important;
+}
+
+.mat-mdc-select {
+    text-align: center !important;
+}
+
+.mat-mdc-paginator-page-size .mat-mdc-text-field-wrapper {
+    padding: 0 8px !important;
+    background-color: #f8f9fa !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 0.375rem !important;
+}
+
+.mat-mdc-paginator-page-size .mat-mdc-text-field-wrapper:hover {
+    border-color: #0d6efd !important;
+}
+
+.mat-mdc-paginator-page-size .mdc-text-field--outlined .mdc-notched-outline {
+    display: none !important;
+}
+
+/* Navigation buttons */
+.mat-mdc-paginator-navigation-previous,
+.mat-mdc-paginator-navigation-next {
+    color: #0d6efd !important;
+    border: 1px solid #dee2e6 !important;
+    border-radius: 0.375rem !important;
+    margin: 0 4px !important;
+    width: 36px !important;
+    height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease-in-out !important;
+    position: relative !important;
+}
+
+.mat-mdc-paginator-navigation-previous::before,
+.mat-mdc-paginator-navigation-next::before {
+    font-family: "Material Icons" !important;
+    font-size: 24px !important;
+    line-height: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.mat-mdc-paginator-navigation-previous::before {
+    content: "chevron_left" !important;
+}
+
+.mat-mdc-paginator-navigation-next::before {
+    content: "chevron_right" !important;
+}
+
+.mat-mdc-paginator-navigation-previous:hover,
+.mat-mdc-paginator-navigation-next:hover {
+    background-color: #0d6efd !important;
+    color: white !important;
+    border-color: #0d6efd !important;
+}
+
+.mat-mdc-paginator-navigation-previous:disabled,
+.mat-mdc-paginator-navigation-next:disabled {
+    color: #6c757d !important;
+    border-color: #dee2e6 !important;
+    background-color: #e9ecef !important;
+    cursor: not-allowed !important;
+}
+
+/* Range label */
+.mat-mdc-paginator-range-label {
+    margin: 0 24px !important;
+    color: #6c757d !important;
+}
+
+/* Items per page label */
+.mat-mdc-paginator-page-size-label {
+    color: #6c757d !important;
+    margin-right: 8px !important;
+}
+
+/* Select dropdown */
+.mat-mdc-select-value {
+    color: #212529 !important;
+}
+
+.mat-mdc-select-arrow {
+    color: #6c757d !important;
+}
+
+/* Custom styles for the select options */
+.mat-mdc-select-panel {
+    background-color: white !important;
+    border-radius: 0.375rem !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mat-mdc-option {
+    color: #212529 !important;
+    font-size: 14px !important;
+    text-align: center !important;
+}
+
+.mat-mdc-option:hover {
+    background-color: #f8f9fa !important;
+}
+
+.mat-mdc-option.mat-mdc-selected {
+    background-color: #e9ecef !important;
+    color: #0d6efd !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+    .mat-mdc-paginator-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 16px !important;
+    }
+
+    .mat-mdc-paginator-range-label {
+        margin: 8px 0 !important;
+    }
+
+    .mat-mdc-paginator-page-size {
+        margin-right: 0 !important;
+        margin-bottom: 8px !important;
+    }
+}

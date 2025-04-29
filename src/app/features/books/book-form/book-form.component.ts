@@ -10,6 +10,7 @@ import { SharedModule } from '../../../shared';
 
 @Component({
   selector: 'app-book-form',
+  standalone: true,
   imports: [SharedModule],
   templateUrl: './book-form.component.html',
   styleUrls: ['./book-form.component.css']
@@ -58,8 +59,17 @@ export class BookFormComponent implements OnInit {
   loadAuthors(): void {
     this.authorService.getAuthors()
       .subscribe({
-        next: (authors) => this.authors = authors,
-        error: (err) => this.error = 'Failed to load authors. Please try again later.'
+        next: (response) => {
+          if (response && response.items) {
+            this.authors = response.items;
+          } else {
+            this.error = 'Failed to load authors. Invalid response format.';
+          }
+        },
+        error: (err) => {
+          console.error('Error loading authors:', err);
+          this.error = 'Failed to load authors. Please try again later.';
+        }
       });
   }
 
@@ -77,7 +87,10 @@ export class BookFormComponent implements OnInit {
           }
           this.bookForm.patchValue(book);
         },
-        error: (err) => this.error = 'Failed to load book details. Please try again later.'
+        error: (err) => {
+          console.error('Error loading book:', err);
+          this.error = 'Failed to load book details. Please try again later.';
+        }
       });
   }
 
@@ -100,7 +113,10 @@ export class BookFormComponent implements OnInit {
             this.success = 'Book updated successfully';
             setTimeout(() => this.router.navigate(['/books']), 1500);
           },
-          error: (err) => this.error = 'Failed to update book. Please try again later.'
+          error: (err) => {
+            console.error('Error updating book:', err);
+            this.error = 'Failed to update book. Please try again later.';
+          }
         });
     } else {
       this.bookService.createBook(bookData)
@@ -110,7 +126,10 @@ export class BookFormComponent implements OnInit {
             this.success = 'Book created successfully';
             setTimeout(() => this.router.navigate(['/books']), 1500);
           },
-          error: (err) => this.error = 'Failed to create book. Please try again later.'
+          error: (err) => {
+            console.error('Error creating book:', err);
+            this.error = 'Failed to create book. Please try again later.';
+          }
         });
     }
   }

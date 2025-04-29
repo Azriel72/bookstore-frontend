@@ -7,10 +7,12 @@ import { AuthorService } from '../../../core/services/author.service';
 import { BookService } from '../../../core/services/book.service';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { SharedModule } from '../../../shared';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-author-list',
-  imports: [SharedModule],
+  standalone: true,
+  imports: [SharedModule, MatPaginatorModule],
   templateUrl: './author-list.component.html',
   styleUrls: ['./author-list.component.css']
 })
@@ -18,6 +20,12 @@ export class AuthorListComponent implements OnInit {
   authors: Author[] = [];
   loading = true;
   error = '';
+
+  // Pagination
+  pageSize = 9;
+  pageNumber = 1;
+  totalItems = 0;
+  pageSizeOptions = [9, 18, 27];
 
   constructor(
     private authorService: AuthorService,
@@ -34,16 +42,30 @@ export class AuthorListComponent implements OnInit {
     this.loading = true;
     this.error = '';
 
-    this.authorService.getAuthors()
+    this.authorService.getAuthors(this.pageNumber, this.pageSize)
       .pipe(finalize(() => this.loading = false))
       .subscribe({
-        next: (authors) => {
-          this.authors = authors;
-          // Count the number of books for each author
-          this.countAuthorBooks();
+        next: (response) => {
+          if (response && response.items) {
+            this.authors = response.items;
+            this.totalItems = response.totalCount;
+            // Count the number of books for each author
+            this.countAuthorBooks();
+          } else {
+            this.error = 'Invalid response format from server';
+          }
         },
-        error: (err) => this.error = 'Failed to load authors. Please try again later.'
+        error: (err) => {
+          console.error('Error loading authors:', err);
+          this.error = 'Failed to load authors. Please try again later.';
+        }
       });
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.pageNumber = event.pageIndex + 1;
+    this.pageSize = event.pageSize;
+    this.loadAuthors();
   }
 
   countAuthorBooks(): void {
@@ -77,8 +99,15 @@ export class AuthorListComponent implements OnInit {
           .subscribe({
             next: () => {
               this.authors = this.authors.filter(author => author.id !== id);
+              if (this.authors.length === 0 && this.pageNumber > 1) {
+                this.pageNumber--;
+                this.loadAuthors();
+              }
             },
-            error: (err) => this.error = 'Failed to delete author. Please try again later.'
+            error: (err) => {
+              console.error('Error deleting author:', err);
+              this.error = 'Failed to delete author. Please try again later.';
+            }
           });
       }
     });

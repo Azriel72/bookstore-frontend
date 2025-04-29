@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { BookListComponent } from './book-list/book-list.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
@@ -26,11 +25,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    BookListComponent,
-    BookDetailComponent,
-    BookFormComponent
+    RouterModule.forChild(routes)
   ]
 })
 export class BooksModule { }

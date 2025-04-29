@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Author } from '../models/author.model';
 import { ApiService } from './api.service';
+import { PaginatedResponse } from '../models/paginated-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,11 @@ export class AuthorService {
 
   constructor(private apiService: ApiService) { }
 
-  getAuthors(): Observable<Author[]> {
-    return this.apiService.get<Author[]>(this.endpoint);
+  getAuthors(pageNumber: number = 1, pageSize: number = 9): Observable<PaginatedResponse<Author>> {
+    return this.apiService.get<PaginatedResponse<Author>>(this.endpoint, {
+      pageNumber,
+      pageSize
+    });
   }
 
   getAuthorById(id: number): Observable<Author> {
